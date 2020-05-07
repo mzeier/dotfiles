@@ -13,7 +13,7 @@ Production Engineering & Operations is really focused on two pillars:
 Much of this assumes you're already a skilled Linux/OSX user.
 
 ## Bootstrap
-Many of this has been codified in a `[Brewfile](https://github.com/mzeier/dotfiles/blob/master/Brewfile)`. 
+Many of this has been codified in a [`Brewfile`](https://github.com/mzeier/dotfiles/blob/master/Brewfile). 
 
 To quickly bootstrap, install [Homebrew](https://brew.sh/):
 
@@ -39,17 +39,15 @@ $ git config --global user.email "john@doe.org"
 * `brew install pyenv`
 * `pyenv global 3.8.2`
 
-To activate, add the following to `.bashrc`:
-
+To activate, add the following to `.zshrc`:
 ```
-export PATH="/Users/username/.pyenv:$PATH"
-eval "$(pyenv init -)"
+$ echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >> ~/. zshrc
 
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 ```
 
 ## Python PIP packages
-All off my pip packages are in this [requirements.txt](https://github.com/mzeier/dotfiles/blob/master/requirements.txt).
+All off my pip packages are in this [`requirements.txt`](https://github.com/mzeier/dotfiles/blob/master/requirements.txt).
 
 The following will install these packages:
 ```
@@ -65,11 +63,16 @@ We rely on the [AWS cli]() and it's support for [Named Profiles]().
 #### Configuration File Setup
 1. Create a `$HOME/.aws` directory if you don't have one.
 2. Create a file named `$HOME/.aws/config` and add the following to it
+
+
     ```
     [default]
     region=us-west-2
     ```
+    
+    
 3. Create a file named `$HOME/.aws/credentials` and add the following to it, in preparation for generating your IAM user(s) below
+
     ```
     [default]
     aws_access_key_id =
