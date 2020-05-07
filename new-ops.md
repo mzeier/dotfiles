@@ -83,7 +83,7 @@ We rely on the [AWS cli]() and it's support for [Named Profiles]().
     aws_secret_access_key =
 
 
-    [wavefront-sunnylabs]
+    [sunnylabs-dev]
     aws_access_key_id =
     aws_secret_access_key =
 
