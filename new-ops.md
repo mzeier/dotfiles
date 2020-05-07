@@ -37,17 +37,6 @@ $ git config --global user.name "John Doe"
 $ git config --global user.email "john@doe.org"
 ```
 
-### Repositories to Checkout
-
-- ansible: https://phabricator.corp.wavefront.com/source/ansible/ - `git clone ssh://git@phabricator.corp.wavefront.com/source/ansible.git`
-- postboot: https://phabricator.corp.wavefront.com/source/postboot/ - `git clone ssh://git@phabricator.corp.wavefront.com/source/postboot.git`
-- terraform: https://phabricator.corp.wavefront.com/source/terraform/ - `git clone ssh://git@phabricator.corp.wavefront.com/source/terraform.git`
-- packer: https://phabricator.corp.wavefront.com/source/packer/ - `git clone ssh://git@phabricator.corp.wavefront.com/source/packer.git`
-- devops (tools): https://phabricator.corp.wavefront.com/source/devops/ - `ssh://git@phabricator.corp.wavefront.com/source/devops.git`
-- ops (tools and configs): https://phabricator.corp.wavefront.com/source/ops/ - `git clone ssh://git@phabricator.corp.wavefront.com/source/ops.git`
-- k8s (kubernetes manifests): https://phabricator.corp.wavefront.com/source/k8s/ - `git clone ssh://git@phabricator.corp.wavefront.com/source/k8s.git`
-- docs: https://phabricator.corp.wavefront.com/source/docs - `git clone ssh://git@phabricator.corp.wavefront.com/source/docs.git`
-
 ### brew packages
 * `brew install packer`
 * `brew install terragrunt@0.19.24`
