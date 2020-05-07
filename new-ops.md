@@ -1,34 +1,31 @@
 # New Ops Engineer
 
 ## Production Engineering 
-Welcome to Wavefront and welcome to Operations, where *Reliability is our product*!
+Welcome to Production Engineering & Operations, where *Reliability is our product*!
 
-Operations @ Wavefront is really focused on two pillars:
+Production Engineering & Operations is really focused on two pillars:
 
 1. Product & development velocity ~ empower others to do Ops-like work.
 2. *\#BeachOps* ~ We automate so we can kick back and relax from anywhere and let systems manage themselves. We automate and build tools so we can fix while mobile and aren't tied to a desk.
 
-This document has two purposes.
-
-1. help you get your computers configured with tooling you'll need at Wavefront.
-2. get you on an expert path to familiarity with Wavefront (Day One)
 
 # System Setup
 Much of this assumes you're already a skilled Linux/OSX user.
 
+## Bootstrap
+Many of this has been codified in a `[Brewfile](https://github.com/mzeier/dotfiles/blob/master/Brewfile)`. 
+
+To quickly bootstrap, install [Homebrew](https://brew.sh/):
+
+```
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+```
+
+And run "`brew bundle`" in a directory with your `Brewfile`.
+
 ## General configurations
 
-## brew-based packages
-Many OSX tools come from Homebrew. You'll want to install `brew` as one of your very first steps:
-
-```
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-```
-
 ### Git
-From a terminal
-
-* ` brew install git `
 
 **`git` defaults:**
 
@@ -37,21 +34,10 @@ $ git config --global user.name "John Doe"
 $ git config --global user.email "john@doe.org"
 ```
 
-### brew packages
-* `brew install packer`
-* `brew install terragrunt@0.19.24`
-* `brew install jq`
-* `brew install gnu-sed --with-default-names`
-* `brew install gpg`
-* `brew cask install keepassxc`
 
 ### Python
-Most current version of `python` tends to crash on OSX. 2.7.14 is known to work. Following the steps [here](https://gist.github.com/Bouke/11261620), do the following:
-
-* `brew install readline xz openssl zlib sqlite`
 * `brew install pyenv`
-* `CFLAGS="-I$(brew --prefix openssl)/include -I/usr/local/opt/zlib/include -I/usr/local/opt/sqlite/include" LDFLAGS="-L$(brew --prefix openssl)/lib -L/usr/local/opt/zlib/lib -L/usr/local/opt/sqlite/lib" pyenv install -v 2.7.15`
-* `pyenv global 2.7.15`
+* `pyenv global 3.8.2`
 
 To activate, add the following to `.bashrc`:
 
@@ -63,33 +49,16 @@ export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 ```
 
 ## Python PIP packages
-* `pip install ansible==2.8.5`
-* `pip install credstash==1.15.0`
-* `pip install boto`
-* `pip install boto3`
-* `pip install awscli`
-## Install ARA module to send output [ARA](http://ara.corp.wavefront.com) official link [here](https://ara.readthedocs.io/en/stable/installation.html)
-* `pip install tox`
-* `pip install psycopg2-binary`
-* `pip install ara==0.16.6`   ## Version 1.x is for python3 get this version since we are still  python2
+All off my pip packages are in this [requirements.txt](https://github.com/mzeier/dotfiles/blob/master/requirements.txt).
 
-## Configure ansible.cfg to use [ARA](http://ara.corp.wavefront.com)
-* `python -m ara.setup.ansible >> ~/.ansible.cfg`
-* add the following to ~/.ansible.cfg
-  ```
-  [ara]
-
-  database = credstash -r us-west-2 get ara.database.credentials
-
-  ignore_parameters  =
-  ```
-
+The following will install these packages:
+```
+pip3 install -r requirements.txt
+```
 
 ### AWS
 
-You'll need IAM accounts for cli usage for (at least) the following Wavefront AWS Accounts (as named in Okta):
-- AWS - Sunnylabs
-- AWS - Wavefront-dev
+You'll need IAM accounts for cli usage. 
 
 We rely on the [AWS cli]() and it's support for [Named Profiles]().
 
@@ -116,45 +85,6 @@ We rely on the [AWS cli]() and it's support for [Named Profiles]().
     aws_secret_access_key =
 
     ```
-
-### `terraform` & `chtf`
-Since `terraform` changes versions frequently, you may want to use the [Terraform version switcher](https://github.com/Yleisradio/homebrew-terraforms).
-
-* `brew tap Yleisradio/terraforms`
-* `brew install chtf`
-
-Add the following path to allow python to work properly(since brew doesn't do this for you): /usr/local/opt/python/libexec/bin
-
-Add the following to the `~/.bashrc` or `~/.zshrc` or `~/.bash_profile`(OSX) file:
-
-```bash
-# Source chtf
-if [[ -f /usr/local/share/chtf/chtf.sh ]]; then
-    source "/usr/local/share/chtf/chtf.sh"
-fi
-
-# making sure that all terminal sessions are running with terraform v0.12.8
-chtf 0.12.8
-```
-
-Or select the wanted Terraform version to use with `chtf`.
-
-    chtf 0.12.8
-
-You can also just install a specific Terraform version (but you'll need to use `chtf` or adjust `PATH` yourself to use it):
-
-    brew cask install terraform-0.12.8
-
-#### Installing TF Providers (you must complete all of the python steps before finishing this step)
-after checking out the terraform repository, navigate to terraform/providers
-```bash
-# install the providers
-./link-providers.sh
-```
-
-This will install the appropriate provider for your platform into the proper directory.
-
-Additional instructions per provider will be emitted by the script as well
 
 
 ## OSX Must Haves
