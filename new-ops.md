@@ -1,6 +1,6 @@
 # New Ops Engineer
 
-## Ops @ Wavefront
+## Production Engineering 
 Welcome to Wavefront and welcome to Operations, where *Reliability is our product*!
 
 Operations @ Wavefront is really focused on two pillars:
@@ -117,23 +117,6 @@ We rely on the [AWS cli]() and it's support for [Named Profiles]().
 
     ```
 
-#### Generating your IAM user for AWS - Sunnylabs (prod account)
-1. Using Okta, log into the AWS-Sunnylabs account and create yourself a programmatic user
-2. Under the IAM, use the Add User button to create the account, then choose a username, access type (Programmatic access)
-3. next, then add yourself to these groups: Administrators and credstash-access groups.
-4. Review and finish
-5. You will be provided with an access ID and an access key
-6. Save these and add them to your ~/.aws/credentials file on your workstation.
-  * **Note:** You'll set your sunnylabs IAM user as your default Named Profile.
-
-#### Generating your IAM user for other AWS accounts
-1. Using Okta, log into the AWS - Wavefront-dev account and create yourself a programmatic user
-2. Under the IAM, use the Add User button to create the account, then choose a username, access type (Programmatic access)
-3. next, then add yourself to these groups: Administrators and credit-stash-access groups.
-4. Review and finish
-5. You will be provided with an access ID and an access key
-6. Save these and add them to your ~/.aws/credentials file on your workstation.
-
 ### `terraform` & `chtf`
 Since `terraform` changes versions frequently, you may want to use the [Terraform version switcher](https://github.com/Yleisradio/homebrew-terraforms).
 
@@ -173,28 +156,6 @@ This will install the appropriate provider for your platform into the proper dir
 
 Additional instructions per provider will be emitted by the script as well
 
-### Get setup with phabricator and install `arc`
-
-* Create account on phacility ?
-* Get invited to org
-* Install `arc`, https://secure.phabricator.com/book/phabricator/article/arcanist_quick_start/
-```
-mkdir ~/code/tools
-cd ~/code/tools
-git clone ...
-```
-
-
-### Import gpg private
-
-* Import gpg private
-```
-AWS_PROFILE=sunnylabs credstash -r us-west-2 get keybase.wfops.private.encoded | base64 -D | gpg --import
-```
-
-### OpenVPN
-Visit this site in Confluence (https://wavefront.atlassian.net/wiki/spaces/OBR/pages/108006545/Connect+to+OpenVPN) pay particular attention to completing steps 3 and 4.
-- Consider buying and expensing [Viscocity](https://www.sparklabs.com/viscosity/)
 
 ## OSX Must Haves
 * [Amphetamine](https://itunes.apple.com/us/app/amphetamine/id937984704?mt=12) - override energy settings
@@ -238,69 +199,7 @@ and their Terraform plugin is very solid. You can [grab a trial](https://www.jet
 
 --
 
-# Day One
-On your first day, you'll want to quickly come up to speed on all things Ops @ Wavefront.
-
-Everything here is geared towards getting you familiar with the Wavefront environment and systems and with ensuring your workstation - as well as any access or credentials - are setup.
-
-## phabricator workflow for code review
-
-1. `arc diff`
-2. filling out template for diff
-3. code review
-4. `arc land` (merges to master)
-
-## New cluster spinup
-
-* Build a new cluster
-* Upgrade the cluster version
-* Upsize & contract fdb, including rolling YAML updates
-* Destroy cluster
-
-Things you will learn and configure:
-
-* Phabricator & GitHub
-* AWS credentials & `~/.aws/credentials`
-* VPN access
-* Current release / deployment process
-* Working Terraform & Ansible
-* Jenkins access
-
-## Quiz Time!
+# Quiz Time!
 
 You should be able to answer the following questions:
 
-* What happens at Wavefront when an instance boots up?
-* What is LandingParty and what does it do? ExtractionParty?
-* Difference between Reported Points and Collector Points.
-* What FDB Flow Control is and what happens when it's too high (bonus points, what measures flow control)?
-* What is pushback and what is the customer impact?
-* what types of pushback are there and what do they do?
-
-### Basics
-* In your own words, what is Wavefront's architecture? What are all the tiers & AWS components involved?
-* What do all the Jars do?
-* What is `webconfig` and what does it do on the HA tier? What does "*flapping webconfig*" mean?
-* What does `webconfig` do on the App Tier?
-* Life cycle of a single telemetry point. What happens once it leaves `telegraf`?
-* What are the three common Ansible playbooks we use for each tier and some of the most common tags used?
-* In your own words, what is the process to upsize or downsize a cluster? Where is the runbook for this? Where are the Ansible Playbooks?
-* When can you restart DI with 0 second pause? When or why wouldn't you?
-* Why and how do config changes take effect?
-
-### FoundationDB
-* What are storage/log queues?
-* What does "*cluster operating space*" or "*op space*" mean? What happens if it becomes too low and what are the steps to resolve?
-* What are the inputs into SSD performance issues? What knobs or tools can you use to relieve pressure?
-* What are the inputs into Mem tier performance issues and what knobs or tools can you use to relieve pressure?
-* What does "`unreachable processes`" mean and how do you troubleshoot them? How is this reflected in [fdbhealh](https://mon.wavefront.com/dashboard/fdbhealth)?
-* Where is the Fdb troubleshooting documenet?
-* What is `loghead` and what does it do?
-* What is EnhanceIO and how do we use it and why?
-* What is `killFdbProcesses.sh`? Where is it located, what does it do and what is the proper way to use it?
-
-### Tech Talk Videos
-* List: https://wavefront.atlassian.net/wiki/spaces/ENG/pages/17072169/Tech+Talks
-* BCS Recording: https://vmware.zoom.us/recording/play/birre_QtYt18ZCCIvX939hQyRFsV9Ty_na5fz3QE_CJ2m53yO_wglre94TsND9Mj
-  * Quiz: https://github.com/sunnylabs/docs/tree/master/quiz/bcs.md
-  * Answers: https://github.com/sunnylabs/docs/tree/master/quiz/bcs-answers.md
