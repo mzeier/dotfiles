@@ -12,6 +12,8 @@ Production Engineering & Operations is really focused on two pillars:
 # System Setup
 Much of this assumes you're already a skilled Linux/OSX user.
 
+And inspiration for much of this came from this [blog post](https://dev.to/mattstratton/my-brewfile-1pob).
+
 ## Bootstrap
 Many of this has been codified in a [`Brewfile`](https://github.com/mzeier/dotfiles/blob/master/Brewfile). 
 
