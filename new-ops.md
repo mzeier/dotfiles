@@ -43,7 +43,7 @@ To activate, add the following to `.zshrc`:
 ```
 $ echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >> ~/. zshrc
 
-export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
+$ echo export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES >> ~/. zshrc
 ```
 
 ## Python PIP packages
